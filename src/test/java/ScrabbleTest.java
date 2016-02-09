@@ -12,6 +12,7 @@ public class ScrabbleTest {
   @Test
   public void scrabbleScore_takeInAWordAndReturnTheScore_5() {
     Scrabble testScrabble = new Scrabble();
-    assertEquals(5, testScrabble.scrabbleScore("hi"));
+    Integer score = 5;
+    assertEquals(score, testScrabble.scrabbleScore("hi"));
   }
 }
