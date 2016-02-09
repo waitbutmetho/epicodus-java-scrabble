@@ -9,5 +9,4 @@ public class ScrabbleTest {
     Integer score = 1;
     assertEquals(score, testScrabble.scrabbleScore("a"));
   }
-
 }
