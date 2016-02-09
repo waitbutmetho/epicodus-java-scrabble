@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Scrabble {
   public static void main(String[] args) {}
 
-  public Integer scrabbleScore(String letter) {
+
+  public Integer scrabbleScoreOfLetter(String letter) {
     HashMap<String, Integer> letterValues = new HashMap();
     letterValues.put("a", 1);
     Integer value = letterValues.get(letter);
