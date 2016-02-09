@@ -6,7 +6,24 @@ import static spark.Spark.*;
 
 public class Scrabble {
   public static void main(String[] args) {
+    String layout = "templates/layout.vtl";
 
+    get("/", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/home.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/result", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/result.vtl");
+
+      String userWord = request.queryParams("word");
+      Integer totalScore = scrabbleScore(userWord);
+
+      model.put("totalScore", totalScore);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 
 public static HashMap<String, Integer> createAndPopulateHashMap() {
@@ -40,13 +57,13 @@ public static HashMap<String, Integer> createAndPopulateHashMap() {
   return letterValues;
 }
 
-  public Integer scrabbleScoreOfLetter(String letter) {
+  public static Integer scrabbleScoreOfLetter(String letter) {
     HashMap<String, Integer> letterValues = createAndPopulateHashMap();
     Integer value = letterValues.get(letter);
     return value;
   }
 
-  public Integer scrabbleScore(String word) {
+  public static Integer scrabbleScore(String word) {
     String lowerCaseWord = word.toLowerCase();
     String[] lettersArray = lowerCaseWord.split("");
     Integer wordScore = 0;
